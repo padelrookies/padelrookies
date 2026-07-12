@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iniciar sesión — PadelRookies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <a href="index.html" class="logo-mark">
+      <img src="assets/logo-header.svg" alt="PadelRookies" style="height:38px; width:auto;">
+    </a>
+    <nav>
+      <a href="marca.html">Marca</a>
+      <a href="shop.html">Shop</a>
+      <a href="comunidad.html">Comunidad</a>
+    </nav>
+  </div>
+  <div class="header-right">
+    <a href="unete.html" class="btn-login">Hazte Rookie</a>
+  </div>
+</header>
+
+<section class="join-form-section" style="min-height:70vh; display:flex; align-items:center;">
+  <div class="join-form-inner" style="width:100%;">
+    <span class="eyebrow">Acceso</span>
+    <h1>Bienvenido de vuelta.</h1>
+    <p>Entra a tu perfil y consulta tu carnet Rookie.</p>
+
+    <form class="join-form" id="loginForm">
+      <input type="email" id="email" placeholder="tu@email.com" required>
+      <input type="password" id="password" placeholder="Contraseña" required>
+      <button type="submit" class="btn-primary btn-full" id="submitBtn">Entrar</button>
+      <div id="formMsg" class="form-msg" style="display:none;"></div>
+    </form>
+
+    <p class="join-disclaimer">
+      ¿Aún no eres Rookie? <a href="unete.html" style="color:var(--lime); text-decoration:underline;">Únete gratis</a>
+    </p>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+<script>
+  // El cliente `sb` se crea en auth.js
+
+  async function redirectIfLoggedIn() {
+    try {
+      const { data: { session } = {}, error } = await sb.auth.getSession();
+      if (error) throw error;
+      if (session) window.location.replace('perfil.html');
+    } catch (err) {
+      console.warn('Session check failed:', err);
+    }
+  }
+
+  redirectIfLoggedIn();
+
+  const form    = document.getElementById('loginForm');
+  const formMsg = document.getElementById('formMsg');
+  const btn     = document.getElementById('submitBtn');
+
+  function showMsg(text, type) {
+    formMsg.textContent   = text;
+    formMsg.className     = 'form-msg form-msg--' + type;
+    formMsg.style.display = 'block';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled    = true;
+    btn.textContent = 'Entrando...';
+    formMsg.style.display = 'none';
+
+    try {
+      const { data, error } = await sb.auth.signInWithPassword({
+        email:    document.getElementById('email').value.trim(),
+        password: document.getElementById('password').value,
+      });
+
+      if (error) {
+        btn.disabled    = false;
+        btn.textContent = 'Entrar';
+        const msg = /not confirmed/i.test(error.message)
+          ? 'Tu email aún no está confirmado. Revisa tu bandeja de entrada.'
+          : 'Email o contraseña incorrectos.';
+        showMsg(msg, 'error');
+        return;
+      }
+
+      if (data?.session) {
+        window.location.replace('perfil.html');
+      } else {
+        btn.disabled    = false;
+        btn.textContent = 'Entrar';
+        showMsg('No se pudo iniciar sesión. Inténtalo de nuevo.', 'error');
+      }
+    } catch (err) {
+      btn.disabled    = false;
+      btn.textContent = 'Entrar';
+      console.warn('Login failed:', err);
+      showMsg('Ha habido un problema al iniciar sesión. Inténtalo otra vez.', 'error');
+    }
+  });
+</script>
+
+</body>
+</html>

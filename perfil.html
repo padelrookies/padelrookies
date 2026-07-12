@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Perfil — PadelRookies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <a href="index.html" class="logo-mark">
+      <img src="assets/logo-header.svg" alt="PadelRookies" style="height:38px; width:auto;">
+    </a>
+    <nav>
+      <a href="marca.html">Marca</a>
+      <a href="shop.html">Shop</a>
+      <a href="comunidad.html">Comunidad</a>
+    </nav>
+  </div>
+  <div class="header-right" data-auth-managed="self">
+    <a href="#" class="btn-login" id="logoutBtn">Cerrar sesión</a>
+  </div>
+</header>
+
+<section class="profile-page">
+  <div id="loadingState" class="profile-loading">
+    <p>Cargando tu carnet...</p>
+  </div>
+
+  <div id="profileContent" style="display:none;">
+    <div class="profile-head" style="display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap;">
+      <div>
+        <span class="eyebrow">Tu carnet</span>
+        <h1 id="profileTitle">Bienvenido, <span class="accent" id="profileName">Rookie</span></h1>
+      </div>
+      <span class="credit-chip" id="creditChip">◈ <span id="creditBalance">0</span> créditos</span>
+    </div>
+
+    <div class="card-showcase" style="padding:24px 0 16px;">
+      <div class="member-card-wrap" id="cardWrap">
+        <div class="member-card-tilt" id="cardTilt">
+          <div class="member-card-flip" id="cardFlip">
+
+            <!-- FRENTE -->
+            <div class="member-card member-card-face member-card-face--front card-bg-rookie" id="cardFront">
+              <div class="member-card-shine"></div>
+              <div class="member-card-top">
+                <img src="assets/logo-wordmark.svg" alt="PadelRookies" class="member-card-logo">
+                <span class="member-card-tier" id="cardTier">ROOKIE</span>
+              </div>
+              <div class="member-card-body">
+                <div class="member-card-ident">
+                  <img src="assets/logo-round.png" alt="" class="card-avatar card-avatar-frame--simple" id="cardAvatar">
+                  <div>
+                    <div class="member-card-name" id="cardName">—</div>
+                    <div class="member-card-id" id="cardNumber">MIEMBRO Nº —</div>
+                  </div>
+                </div>
+              </div>
+              <div class="member-card-bottom">
+                <span>PLAY · IMPROVE · SHARE</span>
+                <span class="member-card-since" id="cardSince">—</span>
+              </div>
+            </div>
+
+            <!-- REVERSO -->
+            <div class="member-card member-card-face member-card-face--back member-card-back card-bg-rookie" id="cardBack">
+              <div class="card-back-head"><span>ROOKIE CARD</span><span id="backTier">ROOKIE</span></div>
+              <div class="member-card-body">
+                <div class="card-back-stats">
+                  <div class="card-back-stat"><div class="v" id="backNumber">—</div><div class="l">Nº miembro</div></div>
+                  <div class="card-back-stat"><div class="v" id="backSince">—</div><div class="l">Desde</div></div>
+                  <div class="card-back-stat"><div class="v" id="backLevel">Rookie</div><div class="l">Nivel</div></div>
+                  <div class="card-back-stat"><div class="v" id="backCredits">0</div><div class="l">Créditos</div></div>
+                </div>
+                <div class="card-badges" id="backBadges" style="margin:8px 0;"></div>
+                <div class="card-back-message" id="backMessage"></div>
+              </div>
+              <div class="card-back-foot">
+                <div class="card-back-socials" id="backSocials"></div>
+                <span class="member-card-since">PADELROOKIES</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <p class="card-hint" id="cardHint">Haz clic en el carnet para girarlo ↻</p>
+    </div>
+
+    <!-- EDITOR DE PERSONALIZACIÓN -->
+    <div class="card-editor" id="cardEditor">
+      <div class="card-editor-tabs" id="editorTabs">
+        <button type="button" class="card-tab is-active" data-panel="bg">Fondo</button>
+        <button type="button" class="card-tab" data-panel="accent">Acento</button>
+        <button type="button" class="card-tab" data-panel="effect">Efectos</button>
+        <button type="button" class="card-tab" data-panel="avatarFrame">Avatar</button>
+        <button type="button" class="card-tab" data-panel="back">Reverso</button>
+      </div>
+
+      <div class="card-panel is-active" data-panel="bg"><div class="card-options" id="optsBg"></div></div>
+      <div class="card-panel" data-panel="accent"><div class="card-options" id="optsAccent"></div></div>
+      <div class="card-panel" data-panel="effect"><div class="card-options" id="optsEffect"></div></div>
+      <div class="card-panel" data-panel="avatarFrame">
+        <div class="card-field">
+          <label>Foto de perfil</label>
+          <input type="file" id="avatarFile" accept="image/*">
+        </div>
+        <div class="card-options" id="optsFrame"></div>
+      </div>
+      <div class="card-panel" data-panel="back">
+        <div class="card-field"><label>Mensaje / lema</label><textarea id="fieldMessage" maxlength="120" placeholder="Tu frase, lema o dedicatoria..."></textarea></div>
+        <div class="card-field"><label>Instagram (usuario)</label><input type="text" id="fieldInstagram" placeholder="tuusuario" maxlength="40"></div>
+        <div class="card-field"><label>TikTok (usuario)</label><input type="text" id="fieldTiktok" placeholder="tuusuario" maxlength="40"></div>
+      </div>
+
+      <div class="card-editor-actions">
+        <button type="button" class="btn-primary" id="saveCardBtn">Guardar tarjeta</button>
+        <span class="card-share">Comparte tu carnet: <a id="shareLink" target="_blank" rel="noopener">—</a></span>
+        <span id="editorMsg" class="form-msg" style="display:none;"></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="noSession" style="display:none; text-align:center; padding:60px 0;">
+    <p style="color:var(--grey); margin-bottom:24px;">No has iniciado sesión.</p>
+    <a href="login.html" class="btn-primary">Iniciar sesión</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="assets/logo-redondo.png" alt="PadelRookies">
+      <span>PADELROOKIES</span>
+    </div>
+    <div class="copyright">© 2026 PadelRookies — Play. Improve. Share.</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+<script src="card.js"></script>
+<script>
+  // `sb` viene de auth.js; helpers de tarjeta de card.js
+  const $ = (id) => document.getElementById(id);
+  const CURRENT = { profile: null, config: null, unlocks: new Set(), catalog: [], badges: [] };
+
+  // ── Tilt (en .member-card-tilt) + giro (en .member-card-flip) ─────
+  (function setupTiltFlip() {
+    const wrap = $('cardWrap'), tilt = $('cardTilt'), flip = $('cardFlip');
+    if (!wrap || !tilt || !flip) return;
+    wrap.addEventListener('mousemove', (e) => {
+      if (flip.classList.contains('is-flipped')) return;
+      const r = wrap.getBoundingClientRect();
+      const rx = ((e.clientY - r.top  - r.height/2) / (r.height/2)) * -6;
+      const ry = ((e.clientX - r.left - r.width /2) / (r.width /2)) *  8;
+      tilt.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      const shine = $('cardFront').querySelector('.member-card-shine');
+      const sx = ((e.clientX - r.left) / r.width)  * 100;
+      const sy = ((e.clientY - r.top)  / r.height) * 100;
+      if (shine) shine.style.background = `radial-gradient(circle at ${sx}% ${sy}%, rgba(255,255,255,0.16), transparent 60%)`;
+    });
+    wrap.addEventListener('mouseleave', () => {
+      tilt.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      const shine = $('cardFront').querySelector('.member-card-shine');
+      if (shine) shine.style.background = 'transparent';
+    });
+    flip.addEventListener('click', () => flip.classList.toggle('is-flipped'));
+  })();
+
+  function editorMsg(text, type) {
+    const m = $('editorMsg');
+    m.textContent = text;
+    m.className = 'form-msg form-msg--' + type;
+    m.style.display = 'inline-block';
+  }
+
+  function renderSocials(ig, tk) {
+    const c = $('backSocials'); c.innerHTML = '';
+    const clean = (s) => (s || '').replace(/^@/, '');
+    if (ig) { const a = document.createElement('a'); a.href = 'https://instagram.com/' + clean(ig); a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'IG @' + clean(ig); c.appendChild(a); }
+    if (tk) { const a = document.createElement('a'); a.href = 'https://tiktok.com/@' + clean(tk); a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'TT @' + clean(tk); c.appendChild(a); }
+  }
+
+  function fillCard(p) {
+    const fullName  = [p.nombre, p.apellidos].filter(Boolean).join(' ') || 'Rookie';
+    const memberNum = p.member_number ? String(p.member_number).padStart(4, '0') : '0000';
+    const sinceYear = p.created_at ? new Date(p.created_at).getFullYear() : 2026;
+    const nivel     = p.nivel || 'Rookie';
+
+    $('profileName').textContent = p.nombre || 'Rookie';
+    $('cardName').textContent    = fullName;
+    $('cardNumber').textContent  = 'MIEMBRO Nº ' + memberNum;
+    $('cardTier').textContent    = nivel.toUpperCase();
+    $('cardSince').textContent   = 'Desde ' + sinceYear;
+    if (p.avatar_url) $('cardAvatar').src = p.avatar_url;
+
+    $('backTier').textContent    = nivel.toUpperCase();
+    $('backNumber').textContent  = memberNum;
+    $('backSince').textContent   = sinceYear;
+    $('backLevel').textContent   = nivel;
+    $('backCredits').textContent = p.credits ?? 0;
+    $('creditBalance').textContent = p.credits ?? 0;
+    $('backMessage').textContent = p.card_message || '';
+    renderSocials(p.instagram, p.tiktok);
+
+    $('fieldMessage').value   = p.card_message || '';
+    $('fieldInstagram').value = p.instagram || '';
+    $('fieldTiktok').value    = p.tiktok || '';
+
+    if (p.member_number) {
+      const link = 'carnet.html?m=' + p.member_number;
+      const a = $('shareLink'); a.href = link; a.textContent = link;
+    }
+  }
+
+  function swatchFor(it) {
+    if (it.category === 'background') return (CARD_VISUALS.backgrounds[it.item_key]?.swatch) || '#222';
+    if (it.category === 'accent')     return CARD_VISUALS.accents[it.item_key] || '#888';
+    if (it.category === 'effect') {
+      if (it.item_key === 'fx-holo')     return 'conic-gradient(from 0deg,#ff2d9b,#00e5ff,#d4ff3f,#ff2d9b)';
+      if (it.item_key === 'fx-metal')    return 'linear-gradient(120deg,#333,#cfcfcf,#333)';
+      if (it.item_key === 'fx-animated') return 'linear-gradient(120deg,#222,#999,#222)';
+      return '#1a1a1a';
+    }
+    if (it.category === 'avatar_frame') {
+      const map = { 'frame-lima': '#d4ff3f', 'frame-dorado': '#f5c542', 'frame-holo': 'conic-gradient(from 0deg,#ff2d9b,#00e5ff,#d4ff3f)', 'frame-simple': '#444' };
+      return map[it.item_key] || '#444';
+    }
+    return '#222';
+  }
+
+  const CFG_KEY = { background: 'bg', accent: 'accent', effect: 'effect', avatar_frame: 'avatarFrame' };
+
+  function renderOptions(containerId, items, cfgKey) {
+    const c = $(containerId); if (!c) return; c.innerHTML = '';
+    items.forEach((it) => {
+      const owned  = !it.is_premium || CURRENT.unlocks.has(it.item_key);
+      const active = CURRENT.config[cfgKey] === it.item_key;
+      const el = document.createElement('div');
+      el.className = 'card-option' + (active ? ' is-active' : '') + (owned ? ' is-owned' : ' is-locked');
+
+      const sw = document.createElement('span'); sw.className = 'opt-swatch'; sw.style.background = swatchFor(it);
+      el.appendChild(sw);
+
+      if (it.is_premium && !owned) {
+        const cost = document.createElement('span'); cost.className = 'card-cost'; cost.textContent = it.cost + ' ◈';
+        el.appendChild(cost);
+      }
+      const nm = document.createElement('span'); nm.className = 'opt-name'; nm.textContent = it.name;
+      el.appendChild(nm);
+
+      el.addEventListener('click', () => onOptionClick(it, cfgKey, owned));
+      c.appendChild(el);
+    });
+  }
+
+  function buildEditor() {
+    const byCat = { background: [], accent: [], effect: [], avatar_frame: [] };
+    CURRENT.catalog.forEach((it) => { if (byCat[it.category]) byCat[it.category].push(it); });
+    renderOptions('optsBg', byCat.background, 'bg');
+    renderOptions('optsAccent', byCat.accent, 'accent');
+    renderOptions('optsEffect', byCat.effect, 'effect');
+    renderOptions('optsFrame', byCat.avatar_frame, 'avatarFrame');
+  }
+
+  async function onOptionClick(it, cfgKey, owned) {
+    if (owned) {
+      CURRENT.config[cfgKey] = it.item_key;
+      applyCardConfig($('cardWrap'), CURRENT.config);
+      buildEditor();
+      return;
+    }
+    if (!confirm(`¿Desbloquear "${it.name}" por ${it.cost} créditos?`)) return;
+    try {
+      const res = await purchaseItem(it.item_key);
+      if (res && res.credits != null) {
+        CURRENT.profile.credits = res.credits;
+        $('creditBalance').textContent = res.credits;
+        $('backCredits').textContent = res.credits;
+      }
+      CURRENT.unlocks.add(it.item_key);
+      CURRENT.config[cfgKey] = it.item_key;
+      applyCardConfig($('cardWrap'), CURRENT.config);
+      buildEditor();
+      editorMsg('¡Desbloqueado! ✓', 'success');
+    } catch (err) {
+      editorMsg(err.message || 'No se pudo desbloquear', 'error');
+    }
+  }
+
+  // ── Tabs del editor ──────────────────────────────────────────────
+  $('editorTabs').addEventListener('click', (e) => {
+    const btn = e.target.closest('.card-tab'); if (!btn) return;
+    const panel = btn.dataset.panel;
+    document.querySelectorAll('.card-tab').forEach((t) => t.classList.toggle('is-active', t === btn));
+    document.querySelectorAll('.card-panel').forEach((p) => p.classList.toggle('is-active', p.dataset.panel === panel));
+  });
+
+  // ── Guardar ──────────────────────────────────────────────────────
+  $('saveCardBtn').addEventListener('click', async () => {
+    const btn = $('saveCardBtn'); btn.disabled = true; const old = btn.textContent; btn.textContent = 'Guardando...';
+    const msg = $('fieldMessage').value.trim();
+    const ig  = $('fieldInstagram').value.trim().replace(/^@/, '');
+    const tk  = $('fieldTiktok').value.trim().replace(/^@/, '');
+    try {
+      await saveCardConfig(CURRENT.config, msg, ig, tk);
+      CURRENT.profile.card_message = msg; CURRENT.profile.instagram = ig; CURRENT.profile.tiktok = tk;
+      $('backMessage').textContent = msg;
+      renderSocials(ig, tk);
+      editorMsg('Tarjeta guardada ✓', 'success');
+    } catch (err) {
+      editorMsg(err.message || 'No se pudo guardar', 'error');
+    }
+    btn.disabled = false; btn.textContent = old;
+  });
+
+  // ── Subida de avatar ─────────────────────────────────────────────
+  $('avatarFile').addEventListener('change', async (e) => {
+    const file = e.target.files && e.target.files[0]; if (!file) return;
+    if (!file.type.startsWith('image/')) { editorMsg('El archivo debe ser una imagen.', 'error'); return; }
+    if (file.size > 2 * 1024 * 1024) { editorMsg('La imagen no puede superar los 2MB.', 'error'); return; }
+    const session = (await sb.auth.getSession()).data.session; if (!session) return;
+    const ext = (file.name.split('.').pop() || 'png').toLowerCase();
+    const path = session.user.id + '/avatar.' + ext;
+    try {
+      editorMsg('Subiendo foto...', 'success');
+      const up = await sb.storage.from('avatars').upload(path, file, { upsert: true, cacheControl: '3600' });
+      if (up.error) throw up.error;
+      const { data: { publicUrl } } = sb.storage.from('avatars').getPublicUrl(path);
+      const url = publicUrl + '?t=' + Date.now();
+      const upd = await sb.from('profiles').update({ avatar_url: url }).eq('id', session.user.id);
+      if (upd.error) throw upd.error;
+      CURRENT.profile.avatar_url = url;
+      $('cardAvatar').src = url;
+      editorMsg('Foto actualizada ✓', 'success');
+    } catch (err) {
+      editorMsg(err.message || 'No se pudo subir la foto', 'error');
+    }
+  });
+
+  // ── Carga del perfil ─────────────────────────────────────────────
+  async function loadProfile() {
+    try {
+      const { data: { session } = {}, error: sessionError } = await sb.auth.getSession();
+      if (sessionError) throw sessionError;
+      $('loadingState').style.display = 'none';
+      if (!session) { $('noSession').style.display = 'block'; return; }
+
+      let { data: profile } = await sb.from('profiles').select('*').eq('id', session.user.id).maybeSingle();
+
+      if (!profile) {
+        const nombre    = session.user.user_metadata?.nombre || session.user.email?.split('@')[0] || 'Rookie';
+        const apellidos = session.user.user_metadata?.apellidos || '';
+        const ins = await sb.from('profiles').insert([{ id: session.user.id, nombre, apellidos }]).select().maybeSingle();
+        if (ins.error) console.warn('Fallback profile creation failed:', ins.error.message);
+        profile = ins.data;
+      }
+      if (!profile) { $('noSession').style.display = 'block'; return; }
+
+      CURRENT.profile = profile;
+      CURRENT.config  = Object.assign({}, DEFAULT_CARD_CONFIG, profile.card_config || {});
+      $('profileContent').style.display = 'block';
+
+      fillCard(profile);
+      applyCardConfig($('cardWrap'), CURRENT.config);
+
+      // Catálogo + inventario + insignias (en paralelo)
+      try {
+        const [catalog, unlocks, badges] = await Promise.all([fetchCatalog(), fetchMyUnlocks(), fetchMyBadges()]);
+        CURRENT.catalog = catalog; CURRENT.unlocks = unlocks; CURRENT.badges = badges;
+        buildEditor();
+        renderCardBadges($('backBadges'), badges);
+      } catch (err) {
+        console.warn('Editor load failed:', err);
+      }
+    } catch (err) {
+      console.warn('Profile load failed:', err);
+      $('loadingState').style.display = 'none';
+      $('noSession').style.display = 'block';
+    }
+  }
+
+  loadProfile();
+
+  // ── Logout ───────────────────────────────────────────────────────
+  $('logoutBtn').addEventListener('click', async (e) => {
+    e.preventDefault();
+    try { await sb.auth.signOut(); } catch (err) { console.warn('Logout error:', err); }
+    window.location.href = 'index.html';
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carnet Rookie — PadelRookies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <a href="index.html" class="logo-mark">
+      <img src="assets/logo-header.svg" alt="PadelRookies" style="height:38px; width:auto;">
+    </a>
+    <nav>
+      <a href="marca.html">Marca</a>
+      <a href="shop.html">Shop</a>
+      <a href="comunidad.html">Comunidad</a>
+    </nav>
+  </div>
+  <div class="header-right">
+    <a href="login.html" class="btn-login">Entrar</a>
+  </div>
+</header>
+
+<section class="profile-page">
+  <div id="loadingState" class="profile-loading"><p>Cargando carnet...</p></div>
+
+  <div id="notFound" style="display:none; text-align:center; padding:60px 0;">
+    <p style="color:var(--grey); margin-bottom:24px;">No encontramos ese carnet.</p>
+    <a href="index.html" class="btn-primary">Volver al inicio</a>
+  </div>
+
+  <div id="cardView" style="display:none;">
+    <span class="eyebrow">Carnet Rookie</span>
+    <h1 id="cardOwnerName">—</h1>
+
+    <div class="card-showcase" style="padding:24px 0 16px;">
+      <div class="member-card-wrap" id="cardWrap">
+        <div class="member-card-tilt" id="cardTilt">
+          <div class="member-card-flip" id="cardFlip">
+
+            <!-- FRENTE -->
+            <div class="member-card member-card-face member-card-face--front card-bg-rookie" id="cardFront">
+              <div class="member-card-shine"></div>
+              <div class="member-card-top">
+                <img src="assets/logo-wordmark.svg" alt="PadelRookies" class="member-card-logo">
+                <span class="member-card-tier" id="cardTier">ROOKIE</span>
+              </div>
+              <div class="member-card-body">
+                <div class="member-card-ident">
+                  <img src="assets/logo-round.png" alt="" class="card-avatar card-avatar-frame--simple" id="cardAvatar">
+                  <div>
+                    <div class="member-card-name" id="cardName">—</div>
+                    <div class="member-card-id" id="cardNumber">MIEMBRO Nº —</div>
+                  </div>
+                </div>
+              </div>
+              <div class="member-card-bottom">
+                <span>PLAY · IMPROVE · SHARE</span>
+                <span class="member-card-since" id="cardSince">—</span>
+              </div>
+            </div>
+
+            <!-- REVERSO -->
+            <div class="member-card member-card-face member-card-face--back member-card-back card-bg-rookie" id="cardBack">
+              <div class="card-back-head"><span>ROOKIE CARD</span><span id="backTier">ROOKIE</span></div>
+              <div class="member-card-body">
+                <div class="card-back-stats">
+                  <div class="card-back-stat"><div class="v" id="backNumber">—</div><div class="l">Nº miembro</div></div>
+                  <div class="card-back-stat"><div class="v" id="backSince">—</div><div class="l">Desde</div></div>
+                  <div class="card-back-stat"><div class="v" id="backLevel">Rookie</div><div class="l">Nivel</div></div>
+                  <div class="card-back-stat"><div class="v" id="backBadgeCount">0</div><div class="l">Insignias</div></div>
+                </div>
+                <div class="card-badges" id="backBadges" style="margin:8px 0;"></div>
+                <div class="card-back-message" id="backMessage"></div>
+              </div>
+              <div class="card-back-foot">
+                <div class="card-back-socials" id="backSocials"></div>
+                <span class="member-card-since">PADELROOKIES</span>
+              </div>
+
+              <!-- Candado: reverso bloqueado si no hay seguimiento mutuo -->
+              <div class="card-back-locked" id="backLocked" style="display:none;">
+                <span class="lock-ico">🔒</span>
+                <p id="lockText">El reverso de este carnet solo se desbloquea si os seguís mutuamente.</p>
+                <button type="button" class="btn-primary" id="lockFollowBtn">Seguir</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <p class="card-hint">Haz clic en el carnet para girarlo ↻</p>
+
+      <div id="followBar" style="margin-top:18px; display:none; text-align:center;">
+        <button type="button" class="btn-primary" id="followBtn">Seguir</button>
+        <p id="mutualHint" class="card-hint" style="display:none;">Os seguís mutuamente — reverso desbloqueado ✓</p>
+      </div>
+      <p id="loginToFollow" class="card-hint" style="display:none;">
+        <a href="login.html" style="color:var(--lime); text-decoration:underline;">Inicia sesión</a> para seguir a este miembro.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="assets/logo-redondo.png" alt="PadelRookies">
+      <span>PADELROOKIES</span>
+    </div>
+    <div class="copyright">© 2026 PadelRookies — Play. Improve. Share.</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+<script src="card.js"></script>
+<script>
+  // `sb` viene de auth.js; helpers de card.js
+  const $ = (id) => document.getElementById(id);
+  let OWNER = null;       // datos de la tarjeta (RPC)
+  let VIEWER_SESSION = null;
+
+  // Giro al hacer clic (la vista pública no tiene editor)
+  (function setupFlip() {
+    const flip = $('cardFlip');
+    if (flip) flip.addEventListener('click', () => flip.classList.toggle('is-flipped'));
+  })();
+
+  function memberNumberFromUrl() {
+    const params = new URLSearchParams(location.search);
+    const m = parseInt(params.get('m'), 10);
+    return Number.isFinite(m) ? m : null;
+  }
+
+  function renderSocials(ig, tk) {
+    const c = $('backSocials'); c.innerHTML = '';
+    const clean = (s) => (s || '').replace(/^@/, '');
+    if (ig) { const a = document.createElement('a'); a.href = 'https://instagram.com/' + clean(ig); a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'IG @' + clean(ig); c.appendChild(a); }
+    if (tk) { const a = document.createElement('a'); a.href = 'https://tiktok.com/@' + clean(tk); a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'TT @' + clean(tk); c.appendChild(a); }
+  }
+
+  function fillFront(d) {
+    const fullName  = [d.nombre, d.apellidos].filter(Boolean).join(' ') || 'Rookie';
+    const memberNum = d.member_number ? String(d.member_number).padStart(4, '0') : '0000';
+    const nivel     = d.nivel || 'Rookie';
+    $('cardOwnerName').textContent = fullName;
+    $('cardName').textContent   = fullName;
+    $('cardNumber').textContent = 'MIEMBRO Nº ' + memberNum;
+    $('cardTier').textContent   = nivel.toUpperCase();
+    $('cardSince').textContent  = 'Desde ' + (d.since || 2026);
+    $('backTier').textContent   = nivel.toUpperCase();
+    $('backNumber').textContent = memberNum;
+    $('backSince').textContent  = d.since || 2026;
+    $('backLevel').textContent  = nivel;
+    if (d.avatar_url) $('cardAvatar').src = d.avatar_url;
+    applyCardConfig($('cardWrap'), d.card_config || {});
+  }
+
+  function fillBack(d) {
+    const locked = $('backLocked');
+    if (d.back_unlocked && d.back) {
+      locked.style.display = 'none';
+      $('backMessage').textContent = d.back.message || '';
+      renderSocials(d.back.instagram, d.back.tiktok);
+      const badges = d.back.badges || [];
+      renderCardBadges($('backBadges'), badges);
+      $('backBadgeCount').textContent = badges.length;
+    } else {
+      // Reverso oculto: limpiar datos y mostrar candado
+      $('backMessage').textContent = '';
+      $('backSocials').innerHTML = '';
+      $('backBadges').innerHTML = '';
+      $('backBadgeCount').textContent = '—';
+      locked.style.display = 'flex';
+    }
+  }
+
+  function refreshFollowUI(d) {
+    const followBar = $('followBar');
+    const loginToFollow = $('loginToFollow');
+    const mutualHint = $('mutualHint');
+    const lockBtn = $('lockFollowBtn');
+
+    if (d.is_self) {
+      followBar.style.display = 'none';
+      loginToFollow.style.display = 'none';
+      lockBtn.style.display = 'none';
+      return;
+    }
+    if (!VIEWER_SESSION) {
+      followBar.style.display = 'none';
+      loginToFollow.style.display = 'block';
+      lockBtn.textContent = 'Inicia sesión para seguir';
+      lockBtn.onclick = () => { window.location.href = 'login.html'; };
+      return;
+    }
+    // Logueado y no es su propia tarjeta
+    followBar.style.display = 'block';
+    loginToFollow.style.display = 'none';
+    const label = d.following ? 'Dejar de seguir' : 'Seguir';
+    $('followBtn').textContent = label;
+    lockBtn.textContent = label;
+    mutualHint.style.display = d.is_mutual ? 'block' : 'none';
+    $('followBtn').onclick = doFollow;
+    lockBtn.onclick = doFollow;
+  }
+
+  async function doFollow() {
+    if (!OWNER || !OWNER.id) return;
+    try {
+      await toggleFollow(OWNER.id);
+      // Recargar la tarjeta para reflejar el (des)bloqueo del reverso
+      await loadCard();
+    } catch (err) {
+      console.warn('Follow error:', err);
+      alert(err.message || 'No se pudo completar la acción.');
+    }
+  }
+
+  async function loadCard() {
+    const num = memberNumberFromUrl();
+    if (!num) { $('loadingState').style.display = 'none'; $('notFound').style.display = 'block'; return; }
+
+    try {
+      VIEWER_SESSION = (await sb.auth.getSession()).data.session;
+      const d = await getPublicCard(num);
+      $('loadingState').style.display = 'none';
+
+      if (!d) { $('notFound').style.display = 'block'; return; }
+
+      OWNER = d;
+      $('cardView').style.display = 'block';
+      fillFront(d);
+      fillBack(d);
+      refreshFollowUI(d);
+    } catch (err) {
+      console.warn('Card load failed:', err);
+      $('loadingState').style.display = 'none';
+      $('notFound').style.display = 'block';
+    }
+  }
+
+  loadCard();
+</script>
+
+</body>
+</html>

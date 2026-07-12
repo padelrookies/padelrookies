@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunidad — PadelRookies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <a href="index.html" class="logo-mark">
+      <img src="assets/logo-header.svg" alt="PadelRookies" style="height:38px; width:auto;">
+    </a>
+    <nav>
+      <a href="marca.html">Marca</a>
+      <a href="shop.html">Shop</a>
+      <a href="comunidad.html" class="active">Comunidad</a>
+    </nav>
+  </div>
+  <div class="header-right">
+    <a href="login.html" class="btn-login">Entrar</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <span class="eyebrow">Comunidad</span>
+  <h1>Los mejores puntazos, directos desde la pista.</h1>
+  <p class="subtitle">Lo que ves aquí pasa en partidos reales, 
+    entre amigos,
+     todas las semanas. 
+     Síguenos para no perderte ningún punto.</p>
+</section>
+
+<section id="highlights">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">Lo más visto</span>
+      <h2>Puntazos de la semana</h2>
+    </div>
+    <a href="https://www.instagram.com/padelrookies" class="link-all" target="_blank" rel="noopener">Ver en Instagram →</a>
+  </div>
+  <div class="highlights-grid">
+
+    <a href="https://www.instagram.com/padelrookies" class="highlight-card" target="_blank" rel="noopener">
+      <div class="court-pattern"></div>
+      <span class="badge">Viral</span>
+      <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="highlight-meta">
+        <div class="views">1.2M visualizaciones</div>
+        <div class="title">Contrapared imposible en el tercer set</div>
+      </div>
+    </a>
+
+    <a href="https://www.tiktok.com/@padelrookies" class="highlight-card" target="_blank" rel="noopener">
+      <div class="court-pattern"></div>
+      <span class="badge">Nuevo</span>
+      <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="highlight-meta">
+        <div class="views">340K visualizaciones</div>
+        <div class="title">Bandeja + remate cruzado ganador</div>
+      </div>
+    </a>
+
+    <a href="https://www.instagram.com/padelrookies" class="highlight-card" target="_blank" rel="noopener">
+      <div class="court-pattern"></div>
+      <span class="badge">Top punto</span>
+      <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="highlight-meta">
+        <div class="views">890K visualizaciones</div>
+        <div class="title">Punto de 22 golpes que acabó en bajada</div>
+      </div>
+    </a>
+
+    <a href="https://www.tiktok.com/@padelrookies" class="highlight-card" target="_blank" rel="noopener">
+      <div class="court-pattern"></div>
+      <span class="badge">Amateur</span>
+      <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="highlight-meta">
+        <div class="views">512K visualizaciones</div>
+        <div class="title">Globo defensivo perfecto bajo presión</div>
+      </div>
+    </a>
+
+  </div>
+  <p class="highlights-note">Estos clips son una muestra del contenido que publicamos en Instagram y TikTok.</p>
+</section>
+
+<section id="community-feed">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">De la comunidad</span>
+      <h2>Puntazos de los Rookies</h2>
+    </div>
+  </div>
+  <div class="highlights-grid" id="feedGrid"></div>
+  <p class="highlights-note" id="feedEmpty" hidden>Aún no hay puntazos. ¡Sé el primero en publicar el tuyo!</p>
+  <div style="text-align:center; margin-top:32px;">
+    <button type="button" class="btn-outline" id="loadMoreBtn" hidden>Cargar más</button>
+  </div>
+</section>
+
+<section class="follow-strip">
+  <div class="follow-inner">
+    <div class="follow-card">
+      <span class="eyebrow">Instagram</span>
+      <h3>@padelrookies</h3>
+      <p>Highlights, recopilatorios y lo mejor de cada partido.</p>
+      <a href="https://www.instagram.com/padelrookies" class="btn-outline" target="_blank" rel="noopener">Seguir</a>
+    </div>
+    <div class="follow-card">
+      <span class="eyebrow">TikTok</span>
+      <h3>@padelrookies</h3>
+      <p>Los puntos más virales, en formato corto.</p>
+      <a href="https://www.tiktok.com/@padelrookies" class="btn-outline" target="_blank" rel="noopener">Seguir</a>
+    </div>
+    <div class="follow-card">
+      <span class="eyebrow">YouTube</span>
+      <h3>PadelRookies</h3>
+      <p>Partidos completos y análisis de jugadas.</p>
+      <a href="#" class="btn-outline" target="_blank" rel="noopener">Suscribirse</a>
+    </div>
+  </div>
+</section>
+
+<section class="community" style="padding:100px 32px;">
+  <span class="eyebrow">Comparte tu mejor punto</span>
+  <h2>Publica tu <span class="accent">puntazo.</span></h2>
+  <p>Pega el enlace de tu vídeo de YouTube, Instagram o TikTok. Máximo 3 publicaciones al día.</p>
+
+  <div id="postFormWrap" hidden>
+    <form class="waitlist-form" id="postForm" style="max-width:640px; margin:24px auto 0;">
+      <input type="url" id="postUrl" maxlength="300" required placeholder="https://... (YouTube, Instagram o TikTok)">
+      <input type="text" id="postTitle" maxlength="80" required placeholder="Título del puntazo">
+      <button type="submit" class="btn-primary" id="postBtn">Publicar</button>
+    </form>
+    <p class="highlights-note" style="text-align:center; margin:16px auto 0;">En TikTok usa el enlace completo (tiktok.com/@usuario/video/...), no el enlace corto vm.tiktok.com.</p>
+    <div class="form-msg" id="postMsg" style="max-width:640px; margin:16px auto 0;" hidden></div>
+  </div>
+
+  <div id="postCta" class="hero-cta" style="justify-content:center;" hidden>
+    <a href="login.html" class="btn-primary">Entra para publicar</a>
+    <a href="unete.html" class="btn-outline">Hazte Rookie</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="assets/logo-redondo.png" alt="PadelRookies">
+      <span>PADELROOKIES</span>
+    </div>
+    <div class="socials">
+      <a href="https://www.instagram.com/padelrookies" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.22.598 1.772 1.15.552.552.896 1.112 1.15 1.772.248.638.415 1.363.465 2.428.05 1.066.06 1.405.06 4.122s-.01 3.056-.06 4.122c-.05 1.065-.217 1.79-.465 2.428a4.883 4.883 0 0 1-1.15 1.772c-.552.552-1.112.896-1.772 1.15-.638.248-1.363.415-2.428.465-1.066.05-1.405.06-4.122.06s-3.056-.01-4.122-.06c-1.065-.05-1.79-.217-2.428-.465a4.89 4.89 0 0 1-1.772-1.15 4.904 4.904 0 0 1-1.15-1.772c-.248-.638-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12s.01-3.056.06-4.122c.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.15-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.363-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 1.802c-2.67 0-2.987.01-4.04.058-.976.045-1.505.207-1.858.344-.466.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.048 1.053-.058 1.37-.058 4.041s.01 2.987.058 4.04c.045.976.207 1.505.344 1.858.182.466.398.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058s2.987-.01 4.04-.058c.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.053.058-1.37.058-4.041s-.01-2.987-.058-4.04c-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 0 0-.748-1.15 3.098 3.098 0 0 0-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.053-.048-1.37-.058-4.041-.058zm0 3.063a5.135 5.135 0 1 1 0 10.27 5.135 5.135 0 0 1 0-10.27zm0 8.468a3.333 3.333 0 1 0 0-6.666 3.333 3.333 0 0 0 0 6.666zm6.538-8.671a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg></a>
+      <a href="https://www.tiktok.com/@padelrookies" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.16 0 5.7-2.55 5.7-5.7V9.01a7.35 7.35 0 0 0 4.32 1.39V7.32s-1.96.1-3.27-1.5z"/></svg></a>
+      <a href="#" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a2.999 2.999 0 0 0-2.115-2.115C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.383.526A2.999 2.999 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a2.999 2.999 0 0 0 2.115 2.115c1.878.526 9.383.526 9.383.526s7.505 0 9.383-.526a2.999 2.999 0 0 0 2.115-2.115C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.546 15.568V8.432L15.818 12l-6.272 3.568z"/></svg></a>
+    </div>
+    <div class="copyright">© 2026 PadelRookies — Play. Improve. Share.</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+<script>
+  // `sb` viene de auth.js
+  const $ = (sel) => document.querySelector(sel);
+  const PAGE_SIZE = 12;
+  let feedOffset = 0;
+  let hasSession = false;
+
+  // ── Wrappers RPC (patrón de card.js) ───────────────────────────────
+  async function submitCommunityPost(url, title) {
+    const { data, error } = await sb.rpc('submit_community_post', { p_url: url, p_title: title });
+    if (error) throw error;
+    return data;
+  }
+  async function getCommunityFeed(limit, offset) {
+    const { data, error } = await sb.rpc('get_community_feed', { p_limit: limit, p_offset: offset });
+    if (error) throw error;
+    return data || [];
+  }
+  async function deleteCommunityPost(postId) {
+    const { data, error } = await sb.rpc('delete_community_post', { p_post_id: postId });
+    if (error) throw error;
+    return data;
+  }
+
+  // ── Validación de URL en cliente (espejo de la del servidor) ───────
+  const URL_PATTERNS = [
+    { platform: 'youtube',   re: /^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?(?:[^#]*&)?v=([\w-]{11})(?:[&#].*)?$/i },
+    { platform: 'youtube',   re: /^https?:\/\/youtu\.be\/([\w-]{11})(?:[?#].*)?$/i },
+    { platform: 'youtube',   re: /^https?:\/\/(?:www\.|m\.)?youtube\.com\/shorts\/([\w-]{11})(?:[?/#].*)?$/i },
+    { platform: 'instagram', re: /^https?:\/\/(?:www\.)?instagram\.com\/(?:reel|reels|p)\/([\w-]{5,20})\/?(?:[?#].*)?$/i },
+    { platform: 'tiktok',    re: /^https?:\/\/(?:www\.)?tiktok\.com\/@[\w.]{1,30}\/video\/(\d{5,25})(?:[?#].*)?$/i }
+  ];
+  function detectPlatform(raw) {
+    let url = (raw || '').trim();
+    if (url && !/^https?:\/\//i.test(url)) url = 'https://' + url;
+    for (const p of URL_PATTERNS) if (p.re.test(url)) return p.platform;
+    return null;
+  }
+
+  function showPostMsg(text, type) {
+    const m = $('#postMsg');
+    m.textContent = text;
+    m.className = 'form-msg form-msg--' + type;
+    m.hidden = false;
+  }
+
+  function timeAgo(iso) {
+    const diffMs = Date.now() - new Date(iso).getTime();
+    const mins = Math.floor(diffMs / 60000);
+    if (mins < 60) return `hace ${Math.max(mins, 1)} min`;
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return `hace ${hours} h`;
+    return `hace ${Math.floor(hours / 24)} d`;
+  }
+
+  const PLATFORM_LABEL = { youtube: 'YouTube', instagram: 'Instagram', tiktok: 'TikTok' };
+
+  // ── Construcción de cada tarjeta (siempre createElement/textContent) ─
+  function buildPostCard(post) {
+    const card = document.createElement('article');
+    card.className = 'highlight-card';
+
+    if (post.platform === 'youtube') {
+      const img = document.createElement('img');
+      img.className = 'hl-thumb';
+      img.loading = 'lazy';
+      img.alt = post.title;
+      img.src = 'https://i.ytimg.com/vi/' + post.video_id + '/hqdefault.jpg';
+      card.appendChild(img);
+    } else {
+      const pattern = document.createElement('div');
+      pattern.className = 'court-pattern';
+      card.appendChild(pattern);
+    }
+
+    const badge = document.createElement('span');
+    badge.className = 'badge';
+    badge.textContent = PLATFORM_LABEL[post.platform] || post.platform;
+    card.appendChild(badge);
+
+    const playIcon = document.createElement('div');
+    playIcon.className = 'play-icon';
+    playIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+    card.appendChild(playIcon);
+
+    if (post.is_own) {
+      const del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'hl-delete';
+      del.setAttribute('aria-label', 'Borrar publicación');
+      del.textContent = '×';
+      del.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        if (!confirm('¿Borrar este puntazo?')) return;
+        try {
+          await deleteCommunityPost(post.id);
+          card.remove();
+        } catch (err) {
+          alert(err.message || 'No se pudo borrar.');
+        }
+      });
+      card.appendChild(del);
+    }
+
+    const meta = document.createElement('div');
+    meta.className = 'highlight-meta';
+    const views = document.createElement('div');
+    views.className = 'views';
+    views.textContent = '@' + (post.author_name || 'Rookie') + ' · ' + timeAgo(post.created_at);
+    const title = document.createElement('div');
+    title.className = 'title';
+    title.textContent = post.title;
+    meta.appendChild(views);
+    meta.appendChild(title);
+    card.appendChild(meta);
+
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.hl-delete')) return;
+      if (post.platform === 'youtube') {
+        if (card.querySelector('.hl-embed')) return;
+        if (!/^[A-Za-z0-9_-]{11}$/.test(post.video_id)) return;
+        const wrap = document.createElement('div');
+        wrap.className = 'hl-embed';
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube-nocookie.com/embed/' + post.video_id + '?autoplay=1&playsinline=1';
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+        iframe.allowFullscreen = true;
+        wrap.appendChild(iframe);
+        card.appendChild(wrap);
+      } else {
+        window.open(post.url, '_blank', 'noopener');
+      }
+    });
+
+    return card;
+  }
+
+  // ── Carga del feed ──────────────────────────────────────────────────
+  async function loadFeed(reset) {
+    if (reset) { feedOffset = 0; $('#feedGrid').innerHTML = ''; }
+    try {
+      const posts = await getCommunityFeed(PAGE_SIZE, feedOffset);
+      posts.forEach((p) => $('#feedGrid').appendChild(buildPostCard(p)));
+      feedOffset += posts.length;
+      $('#feedEmpty').hidden = feedOffset > 0;
+      $('#loadMoreBtn').hidden = posts.length < PAGE_SIZE;
+    } catch (err) {
+      console.warn('Feed load failed:', err);
+    }
+  }
+  $('#loadMoreBtn').addEventListener('click', () => loadFeed(false));
+
+  // ── Publicar ─────────────────────────────────────────────────────────
+  $('#postUrl').addEventListener('input', (e) => {
+    const platform = detectPlatform(e.target.value);
+    if (!e.target.value.trim()) { $('#postMsg').hidden = true; return; }
+    if (platform) showPostMsg('✓ Enlace de ' + PLATFORM_LABEL[platform] + ' detectado', 'success');
+    else showPostMsg('Enlace no reconocido. Usa un enlace de vídeo de YouTube, Instagram o TikTok.', 'error');
+  });
+
+  $('#postForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const url = $('#postUrl').value.trim();
+    const title = $('#postTitle').value.trim();
+    if (!detectPlatform(url)) { showPostMsg('Enlace no válido.', 'error'); return; }
+    if (title.length < 3) { showPostMsg('El título debe tener al menos 3 caracteres.', 'error'); return; }
+
+    const btn = $('#postBtn');
+    btn.disabled = true;
+    const oldText = btn.textContent;
+    btn.textContent = 'Publicando...';
+    try {
+      const post = await submitCommunityPost(url, title);
+      $('#feedGrid').prepend(buildPostCard(Object.assign({ author_name: 'Tú' }, post)));
+      $('#feedEmpty').hidden = true;
+      $('#postForm').reset();
+      showPostMsg('¡Publicado! 🎉', 'success');
+    } catch (err) {
+      showPostMsg(err.message || 'No se pudo publicar.', 'error');
+    }
+    btn.disabled = false;
+    btn.textContent = oldText;
+  });
+
+  // ── Alternar formulario / CTA según sesión ──────────────────────────
+  async function refreshAuthUI() {
+    const { data: { session } = {} } = await sb.auth.getSession();
+    hasSession = !!session;
+    $('#postFormWrap').hidden = !hasSession;
+    $('#postCta').hidden = hasSession;
+  }
+  sb.auth.onAuthStateChange(() => refreshAuthUI());
+
+  refreshAuthUI();
+  loadFeed(true);
+</script>
+
+</body>
+</html>
