@@ -70,6 +70,14 @@
         { yPercent: 0, opacity: 1, duration: 0.9, ease: EASE, stagger: 0.12, paused: true }
       );
 
+      // data-reveal-manual: no se auto-reproduce; otro script decide cuándo
+      // (ver .__playLineReveal en el elemento), por ejemplo para sincronizarlo
+      // con algo más (vídeo, etc.).
+      if (block.hasAttribute('data-reveal-manual')) {
+        block.__playLineReveal = () => tween.play();
+        return;
+      }
+
       // Above the fold (hero): reproduce al cargar; si no, al entrar en viewport
       if (block.getBoundingClientRect().top < window.innerHeight * 0.9) {
         tween.delay(0.15).play();

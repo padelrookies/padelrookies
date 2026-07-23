@@ -35,7 +35,7 @@
   </video>
   <div class="ed-hero-inner" data-parallax="0.08">
     <span class="ed-eyebrow"><span class="ball-dot ball-dot--sm"></span> Est. 2026 — Pádel amateur</span>
-    <h1 class="ed-hero-title" data-reveal-lines>
+    <h1 class="ed-hero-title" data-reveal-lines data-reveal-manual>
       <span data-line>Play. Improve.</span>
       <span data-line><em class="ball-word">Share</em><span class="ball-dot"></span></span>
     </h1>
@@ -110,10 +110,14 @@
     if (!video) return;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const alreadySeen = sessionStorage.getItem('introSeen');
+    const title = document.querySelector('.ed-hero-title');
+    const playTitle = () => title && title.__playLineReveal && title.__playLineReveal();
 
-    // Sin vídeo: se ve directamente el fondo estático de .ed-hero (mismo encuadre, 65% 46% cover).
+    // Sin vídeo: se ve directamente el fondo estático de .ed-hero (mismo encuadre, 65% 46% cover),
+    // y el titular se revela ya, sin nada con lo que sincronizarlo.
     if (reduceMotion || alreadySeen) {
       video.remove();
+      playTitle();
       return;
     }
     sessionStorage.setItem('introSeen', '1');
@@ -127,9 +131,20 @@
     };
     video.addEventListener('ended', revealStatic);
     video.addEventListener('error', revealStatic);
-    // Respaldo: en algunos navegadores 'ended' no llega a disparar tras un seek+play manual.
+
+    // El titular tarda ~1.02s en revelarse del todo (duration 0.9 + stagger 0.12 x 2 líneas).
+    // Se dispara para que termine justo cuando la pelota se asienta (fin del vídeo).
+    const TITLE_REVEAL_DURATION = 1.02;
+    let titleTriggered = false;
     video.addEventListener('timeupdate', () => {
-      if (video.duration && video.currentTime >= video.duration - 0.08) revealStatic();
+      if (!video.duration) return;
+      const remaining = video.duration - video.currentTime;
+      if (!titleTriggered && remaining <= TITLE_REVEAL_DURATION) {
+        titleTriggered = true;
+        playTitle();
+      }
+      // Respaldo: en algunos navegadores 'ended' no llega a disparar tras un seek+play manual.
+      if (video.currentTime >= video.duration - 0.08) revealStatic();
     });
 
     // Recorte: arranca cerca del final (la pelota ya rodando/asentándose) para que sea más corto.
@@ -137,7 +152,7 @@
     const startTrimmed = () => {
       // currentTime es async: hay que esperar a que la búsqueda termine antes de play(), si no play() puede quedarse colgado.
       video.addEventListener('seeked', () => {
-        video.play().catch(revealStatic);
+        video.play().catch(() => { revealStatic(); playTitle(); });
       }, { once: true });
       video.currentTime = Math.max(0, video.duration - 3.2);
     };
