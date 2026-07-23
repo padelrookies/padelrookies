@@ -128,8 +128,11 @@
     // Recorte: arranca cerca del final (la pelota ya rodando/asentándose) para que sea más corto.
     // readyState puede ya ser >=1 al llegar aquí (metadata cargada antes de engancharse el listener), así que no basta con esperar el evento.
     const startTrimmed = () => {
+      // currentTime es async: hay que esperar a que la búsqueda termine antes de play(), si no play() puede quedarse colgado.
+      video.addEventListener('seeked', () => {
+        video.play().catch(revealStatic);
+      }, { once: true });
       video.currentTime = Math.max(0, video.duration - 3.2);
-      video.play();
     };
     if (video.readyState >= 1) {
       startTrimmed();
