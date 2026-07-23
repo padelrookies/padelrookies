@@ -6,7 +6,7 @@
 <title>Shop — PadelRookies</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -33,54 +33,99 @@
   <p class="subtitle">La primera colección de PadelRookies ya tiene diseño. Algunos productos están agotados en este lanzamiento — déjanos tu email en cada uno para que te avisemos en cuanto vuelvan a estar disponibles.</p>
 </section>
 
-<section>
-  <div class="shop-grid">
+<section class="showroom-intro">
+  <p class="showroom-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v14M6 13l6 6 6-6"/></svg>
+    Sigue bajando: cada pieza se acerca a su detalle de marca
+  </p>
+</section>
 
-    <a href="producto-conjunto.html" class="shop-card">
-      <div class="img-area soldout">
-        <span class="tag tag-soldout">Agotado</span>
-        <img src="assets/products/conjunto.png" alt="Conjunto PadelRookies" style="width:100%; height:100%; object-fit:cover;">
-      </div>
-      <div class="info">
-        <div class="pname">Conjunto PR Performance</div>
-        <div class="pprice">39,90€</div>
-      </div>
-    </a>
+<section class="showroom" data-reveal-group>
 
-    <a href="producto-gorra.html" class="shop-card">
-      <div class="img-area soldout">
-        <span class="tag tag-soldout">Agotado</span>
-        <img src="assets/products/gorra.png" alt="Gorra PadelRookies" style="width:100%; height:100%; object-fit:cover;">
+  <div class="showroom-scene" data-focus="64% 82%">
+    <div class="showroom-sticky">
+      <div class="showroom-visual">
+        <img src="assets/products/conjunto.png" alt="Conjunto PR Performance" class="showroom-img">
+        <span class="showroom-tag">Agotado</span>
+        <div class="showroom-vignette" aria-hidden="true"></div>
+        <div class="showroom-caption" aria-hidden="true">
+          <span data-caption-a>Vista completa</span>
+          <span data-caption-b>Detalle · Logo PR</span>
+        </div>
       </div>
-      <div class="info">
-        <div class="pname">Gorra PR Performance Cap</div>
-        <div class="pprice">19,90€</div>
+      <div class="showroom-copy">
+        <span class="eyebrow">Equipación</span>
+        <h2>Conjunto PR<br>Performance</h2>
+        <p class="showroom-desc">Camiseta y short técnico de la primera colección PadelRookies. Tejido transpirable pensado para jugar partidos largos sin perder comodidad, con el logo PR y el wordmark PADELROOKIES serigrafiados.</p>
+        <div class="showroom-price">39,90€</div>
+        <a href="producto-conjunto.html" class="btn-primary">Ver producto</a>
       </div>
-    </a>
-
-    <a href="producto-calcetines.html" class="shop-card">
-      <div class="img-area soldout">
-        <span class="tag tag-soldout">Agotado</span>
-        <img src="assets/products/calcetines.png" alt="Calcetines PadelRookies" style="width:100%; height:100%; object-fit:cover;">
-      </div>
-      <div class="info">
-        <div class="pname">Calcetines Performance</div>
-        <div class="pprice">12,90€</div>
-      </div>
-    </a>
-
-    <a href="producto-munequeras.html" class="shop-card">
-      <div class="img-area soldout">
-        <span class="tag tag-soldout">Agotado</span>
-        <img src="assets/products/munequeras.png" alt="Muñequeras PadelRookies" style="width:100%; height:100%; object-fit:cover;">
-      </div>
-      <div class="info">
-        <div class="pname">Muñequeras PR</div>
-        <div class="pprice">14,90€</div>
-      </div>
-    </a>
-
+    </div>
   </div>
+
+  <div class="showroom-scene" data-focus="42% 47%">
+    <div class="showroom-sticky">
+      <div class="showroom-visual">
+        <img src="assets/products/gorra.png" alt="Gorra PR Performance Cap" class="showroom-img">
+        <span class="showroom-tag">Agotado</span>
+        <div class="showroom-vignette" aria-hidden="true"></div>
+        <div class="showroom-caption" aria-hidden="true">
+          <span data-caption-a>Vista completa</span>
+          <span data-caption-b>Detalle · Logo PR</span>
+        </div>
+      </div>
+      <div class="showroom-copy">
+        <span class="eyebrow">Gorra</span>
+        <h2>Gorra PR<br>Performance Cap</h2>
+        <p class="showroom-desc">Gorra de pádel con visera curva y logo PR bordado en relieve sobre estructura negra mate. El wordmark PADELROOKIES queda bordado en el lateral. Ajuste trasero regulable.</p>
+        <div class="showroom-price">19,90€</div>
+        <a href="producto-gorra.html" class="btn-primary">Ver producto</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="showroom-scene" data-focus="58% 27%">
+    <div class="showroom-sticky">
+      <div class="showroom-visual">
+        <img src="assets/products/calcetines.png" alt="Calcetines Performance" class="showroom-img">
+        <span class="showroom-tag">Agotado</span>
+        <div class="showroom-vignette" aria-hidden="true"></div>
+        <div class="showroom-caption" aria-hidden="true">
+          <span data-caption-a>Vista completa</span>
+          <span data-caption-b>Detalle · Logo PR</span>
+        </div>
+      </div>
+      <div class="showroom-copy">
+        <span class="eyebrow">Calcetines</span>
+        <h2>Calcetines<br>Performance</h2>
+        <p class="showroom-desc">Caña media con acolchado en zona de impacto, disponibles en negro y blanco. Logo PR tejido en el empeine y wordmark PADELROOKIES en la planta. Pensados para partidos intensos sin rozaduras.</p>
+        <div class="showroom-price">12,90€</div>
+        <a href="producto-calcetines.html" class="btn-primary">Ver producto</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="showroom-scene" data-focus="30% 44%">
+    <div class="showroom-sticky">
+      <div class="showroom-visual">
+        <img src="assets/products/munequeras.png" alt="Muñequeras PR" class="showroom-img">
+        <span class="showroom-tag">Agotado</span>
+        <div class="showroom-vignette" aria-hidden="true"></div>
+        <div class="showroom-caption" aria-hidden="true">
+          <span data-caption-a>Vista completa</span>
+          <span data-caption-b>Detalle · Logo PR</span>
+        </div>
+      </div>
+      <div class="showroom-copy">
+        <span class="eyebrow">Muñequeras</span>
+        <h2>Muñequeras PR</h2>
+        <p class="showroom-desc">Pack de muñequeras de rizo absorbente en negro y blanco, con logo PR y wordmark PADELROOKIES tejidos. Pensadas para mantener el agarre seco en los puntos largos.</p>
+        <div class="showroom-price">14,90€</div>
+        <a href="producto-munequeras.html" class="btn-primary">Ver producto</a>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <section class="community" style="padding:90px 32px;">
@@ -123,8 +168,14 @@
   });
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="auth.js"></script>
+<script src="motion.js"></script>
+<script src="showroom.js"></script>
 
 </body>
 </html>
