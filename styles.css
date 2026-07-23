@@ -486,8 +486,12 @@
     border-color:#3a3a3a;
     color:#ccc;
   }
-  .shop-card .img-area.soldout img{
+  .shop-card .img-area.soldout img,
+  .shop-card .img-area.soldout video{
     opacity:0.55;
+  }
+  .shop-card .img-area video{
+    width:100%; height:100%; object-fit:cover;
   }
   .shop-card .info{padding:18px;}
   .shop-card .pname{font-size:14px; font-weight:600; margin-bottom:6px;}
@@ -509,7 +513,7 @@
     position:absolute;
     top:0; left:50%;
     transform:translateX(-50%);
-    width: 0px; height:100%;
+    width:1px; height:100%;
     background:linear-gradient(to bottom, transparent, var(--line) 20%, var(--line) 80%, transparent);
     z-index:0;
   }
@@ -574,7 +578,7 @@
     gap:24px;
   }
   .footer-logo{display:flex; align-items:center; gap:12px;}
-  .footer-logo img{height:54px;}
+  .footer-logo img{height:36px;}
   .footer-logo span{
     font-family:'Space Grotesk', sans-serif;
     font-weight:700;
@@ -725,11 +729,28 @@
     overflow:hidden;
     background:linear-gradient(160deg, #222, #111);
   }
-  .product-image img{
+  .product-image img,
+  .product-image video{
     width:100%; height:100%;
     object-fit:cover;
     opacity:0.6;
   }
+  .product-image .product-photo{ display:none; }
+  .shop-card .img-area .video-fallback{ display:none; }
+  .product-image .gallery-next{
+    position:absolute; bottom:16px; right:16px; z-index:3;
+    width:44px; height:44px;
+    border:2px solid rgba(255,255,255,0.4);
+    border-radius:50%;
+    background:rgba(0,0,0,0.4);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--white);
+    cursor:pointer;
+    opacity:0.8;
+    transition:opacity .2s, border-color .2s;
+  }
+  .product-image .gallery-next:hover{ opacity:1; border-color:var(--lime); }
+  .product-image .gallery-next svg{ width:18px; height:18px; }
   .product-image .tag-soldout{
     position:absolute; top:18px; left:18px;
     font-size:11px; font-weight:700; letter-spacing:0.1em;
@@ -916,7 +937,7 @@
     position:relative; z-index:1;
   }
   .member-card-logo{
-    height:46px;
+    height:30px;
   }
   .member-card-tier{
     font-family:'Space Grotesk', sans-serif;
@@ -1637,4 +1658,6 @@
   /* reduced motion */
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important; transition:none !important;}
+    .shop-card .img-area video{ display:none; }
+    .shop-card .img-area .video-fallback{ display:block; }
   }

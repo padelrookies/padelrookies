@@ -14,7 +14,7 @@
 <header>
   <div class="header-left">
     <a href="index.html" class="logo-mark">
-      <img src="assets/logo-header.svg" alt="PadelRookies" style="height:38px; width:auto;">
+      <img src="assets/logo-simple.jpg" alt="PadelRookies" style="height:44px; width:auto;">
     </a>
     <nav>
       <a href="marca.html">Marca</a>
@@ -34,7 +34,13 @@
 
   <div class="product-image">
     <span class="tag-soldout">Agotado</span>
-    <img src="assets/products/calcetines.png" alt="Calcetines Performance">
+    <video class="product-video" muted loop playsinline poster="assets/products/calcetines.png">
+      <source src="assets/products/calcetines.mp4" type="video/mp4">
+    </video>
+    <img class="product-photo" src="assets/products/calcetines.png" alt="Calcetines Performance">
+    <button class="gallery-next" type="button" aria-label="Ver siguiente imagen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
   </div>
 
   <div class="product-info">
@@ -66,7 +72,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <img src="assets/logo-redondo.png" alt="PadelRookies">
+      <img src="assets/logo-simple.jpg" alt="PadelRookies">
       <span>PADELROOKIES</span>
     </div>
     <div class="socials">
@@ -89,6 +95,26 @@
         btn.disabled = true;
         btn.textContent = '¡Apuntado! 🎉';
       }
+    });
+  });
+
+  document.querySelectorAll('.product-image').forEach(container => {
+    const video = container.querySelector('.product-video');
+    const photo = container.querySelector('.product-photo');
+    const nextBtn = container.querySelector('.gallery-next');
+    if (!video || !photo || !nextBtn) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const slides = [video, photo];
+    let index = reduceMotion ? 1 : 0;
+    slides.forEach((el, i) => { el.style.display = i === index ? 'block' : 'none'; });
+    if (index === 0) { video.currentTime = 0; video.play(); }
+
+    nextBtn.addEventListener('click', () => {
+      slides[index].style.display = 'none';
+      if (slides[index] === video) video.pause();
+      index = (index + 1) % slides.length;
+      slides[index].style.display = 'block';
+      if (slides[index] === video) { video.currentTime = 0; video.play(); }
     });
   });
 </script>
