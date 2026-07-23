@@ -34,7 +34,11 @@
 
   <div class="product-image">
     <span class="tag-soldout">Agotado</span>
-    <img src="assets/products/short.png" alt="Short PR Performance">
+    <img class="product-photo" src="assets/products/short-frontal.png" alt="Short PR Performance — frontal">
+    <img class="product-photo" src="assets/products/short-trasera.png" alt="Short PR Performance — trasera">
+    <button class="gallery-next" type="button" aria-label="Ver siguiente imagen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
   </div>
 
   <div class="product-info">
@@ -88,6 +92,20 @@
         btn.disabled = true;
         btn.textContent = '¡Apuntado! 🎉';
       }
+    });
+  });
+
+  document.querySelectorAll('.product-image').forEach(container => {
+    const photos = Array.from(container.querySelectorAll('.product-photo'));
+    const nextBtn = container.querySelector('.gallery-next');
+    if (photos.length < 2 || !nextBtn) return;
+    let index = 0;
+    photos.forEach((el, i) => { el.style.display = i === 0 ? 'block' : 'none'; });
+
+    nextBtn.addEventListener('click', () => {
+      photos[index].style.display = 'none';
+      index = (index + 1) % photos.length;
+      photos[index].style.display = 'block';
     });
   });
 </script>
