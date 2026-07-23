@@ -118,10 +118,8 @@
     }
     sessionStorage.setItem('introSeen', '1');
 
-    const revealStatic = () => {
-      video.classList.add('ed-hero-bg--out');
-      video.addEventListener('transitionend', () => video.remove(), { once: true });
-    };
+    // La foto de fondo es el propio último fotograma del vídeo, así que no hace falta fundido: se quita y ya está.
+    const revealStatic = () => video.remove();
     video.addEventListener('ended', revealStatic);
     video.addEventListener('error', revealStatic);
 

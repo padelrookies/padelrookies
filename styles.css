@@ -1462,9 +1462,7 @@
     position:absolute; inset:0; z-index:0;
     width:100%; height:100%;
     object-fit:cover; object-position:65% 46%;
-    transition:opacity .25s ease;
   }
-  .ed-hero-bg--out{ opacity:0; }
   .ed-hero-inner{
     position:relative; z-index:2;
     max-width:1280px; margin:0 auto; width:100%;
