@@ -1450,11 +1450,21 @@
     display:flex; flex-direction:column; justify-content:center;
     overflow:hidden;
     padding:120px 32px 96px;
-    background:
-      linear-gradient(95deg, rgba(4,5,3,.94) 10%, rgba(4,5,3,.6) 50%, rgba(4,5,3,.3) 100%),
-      url('assets/bg-ball-turf.jpg') 65% 46% / cover no-repeat,
-      var(--black);
+    background:var(--black);
   }
+  .ed-hero::before{
+    content:"";
+    position:absolute; inset:0; z-index:1;
+    background:linear-gradient(95deg, rgba(4,5,3,.94) 10%, rgba(4,5,3,.6) 50%, rgba(4,5,3,.3) 100%);
+    pointer-events:none;
+  }
+  .ed-hero-bg{
+    position:absolute; inset:0; z-index:0;
+    width:100%; height:100%;
+    object-fit:cover; object-position:65% 46%;
+    transition:opacity .25s ease;
+  }
+  .ed-hero-bg--out{ opacity:0; }
   .ed-hero-inner{
     position:relative; z-index:2;
     max-width:1280px; margin:0 auto; width:100%;

@@ -27,8 +27,12 @@
   </div>
 </header>
 
-<!-- Fotos de fondo: Unsplash (licencia gratuita) — pelota/moqueta y fibra de carbono (Madeline Liu) -->
+<!-- Fondo: intro en vídeo (la pelota rueda y se asienta) que se funde con la foto estática de fondo, mismo encuadre — Unsplash pelota/moqueta (Madeline Liu). Una vez por sesión; se omite con prefers-reduced-motion. -->
 <section class="ed-hero">
+  <img class="ed-hero-bg" src="assets/bg-ball-turf.jpg" alt="">
+  <video id="introVideo" class="ed-hero-bg" muted playsinline>
+    <source src="assets/intro-pelota.mp4" type="video/mp4">
+  </video>
   <div class="ed-hero-inner" data-parallax="0.08">
     <span class="ed-eyebrow"><span class="ball-dot ball-dot--sm"></span> Est. 2026 — Pádel amateur</span>
     <h1 class="ed-hero-title" data-reveal-lines>
@@ -99,6 +103,35 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="auth.js"></script>
 <script src="motion.js"></script>
+
+<script>
+  (() => {
+    const video = document.getElementById('introVideo');
+    if (!video) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const alreadySeen = sessionStorage.getItem('introSeen');
+
+    // Sin vídeo: se ve directamente el fondo estático de .ed-hero (mismo encuadre, 65% 46% cover).
+    if (reduceMotion || alreadySeen) {
+      video.remove();
+      return;
+    }
+    sessionStorage.setItem('introSeen', '1');
+
+    const revealStatic = () => {
+      video.classList.add('ed-hero-bg--out');
+      video.addEventListener('transitionend', () => video.remove(), { once: true });
+    };
+    video.addEventListener('ended', revealStatic);
+    video.addEventListener('error', revealStatic);
+
+    // Recorte: arranca cerca del final (la pelota ya rodando/asentándose) para que sea más corto.
+    video.addEventListener('loadedmetadata', () => {
+      video.currentTime = Math.max(0, video.duration - 3.2);
+      video.play();
+    }, { once: true });
+  })();
+</script>
 
 </body>
 </html>
