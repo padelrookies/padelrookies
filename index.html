@@ -126,10 +126,16 @@
     video.addEventListener('error', revealStatic);
 
     // Recorte: arranca cerca del final (la pelota ya rodando/asentándose) para que sea más corto.
-    video.addEventListener('loadedmetadata', () => {
+    // readyState puede ya ser >=1 al llegar aquí (metadata cargada antes de engancharse el listener), así que no basta con esperar el evento.
+    const startTrimmed = () => {
       video.currentTime = Math.max(0, video.duration - 3.2);
       video.play();
-    }, { once: true });
+    };
+    if (video.readyState >= 1) {
+      startTrimmed();
+    } else {
+      video.addEventListener('loadedmetadata', startTrimmed, { once: true });
+    }
   })();
 </script>
 
