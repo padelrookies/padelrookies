@@ -111,13 +111,20 @@
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const alreadySeen = sessionStorage.getItem('introSeen');
     const title = document.querySelector('.ed-hero-title');
-    const playTitle = () => title && title.__playLineReveal && title.__playLineReveal();
+    const eyebrow = document.querySelector('.ed-hero .ed-eyebrow');
+    const foot = document.querySelector('.ed-hero-foot');
+    const revealHeroContent = () => {
+      title && title.__playLineReveal && title.__playLineReveal();
+      if (typeof gsap !== 'undefined') {
+        gsap.to([eyebrow, foot], { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1 });
+      }
+    };
 
     // Sin vídeo: se ve directamente el fondo estático de .ed-hero (mismo encuadre, 65% 46% cover),
-    // y el titular se revela ya, sin nada con lo que sincronizarlo.
+    // y el resto del contenido se revela ya, sin nada con lo que sincronizarlo.
     if (reduceMotion || alreadySeen) {
       video.remove();
-      playTitle();
+      revealHeroContent();
       return;
     }
     sessionStorage.setItem('introSeen', '1');
@@ -132,16 +139,16 @@
     video.addEventListener('ended', revealStatic);
     video.addEventListener('error', revealStatic);
 
-    // El titular tarda ~1.02s en revelarse del todo (duration 0.9 + stagger 0.12 x 2 líneas).
+    // El contenido (eyebrow, titular, subtítulo, CTA) tarda ~1.02s en revelarse del todo.
     // Se dispara para que termine justo cuando la pelota se asienta (fin del vídeo).
-    const TITLE_REVEAL_DURATION = 1.02;
-    let titleTriggered = false;
+    const CONTENT_REVEAL_DURATION = 1.02;
+    let contentTriggered = false;
     video.addEventListener('timeupdate', () => {
       if (!video.duration) return;
       const remaining = video.duration - video.currentTime;
-      if (!titleTriggered && remaining <= TITLE_REVEAL_DURATION) {
-        titleTriggered = true;
-        playTitle();
+      if (!contentTriggered && remaining <= CONTENT_REVEAL_DURATION) {
+        contentTriggered = true;
+        revealHeroContent();
       }
       // Respaldo: en algunos navegadores 'ended' no llega a disparar tras un seek+play manual.
       if (video.currentTime >= video.duration - 0.08) revealStatic();
@@ -152,7 +159,7 @@
     const startTrimmed = () => {
       // currentTime es async: hay que esperar a que la búsqueda termine antes de play(), si no play() puede quedarse colgado.
       video.addEventListener('seeked', () => {
-        video.play().catch(() => { revealStatic(); playTitle(); });
+        video.play().catch(() => { revealStatic(); revealHeroContent(); });
       }, { once: true });
       video.currentTime = Math.max(0, video.duration - 3.2);
     };

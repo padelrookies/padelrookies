@@ -1467,8 +1467,10 @@
     position:relative; z-index:2;
     max-width:1280px; margin:0 auto; width:100%;
   }
-  .ed-hero .ed-eyebrow{
-    animation: fadeUp .9s ease-out backwards;
+  html.js-motion .ed-hero .ed-eyebrow,
+  html.js-motion .ed-hero-foot{
+    opacity:0;
+    transform:translateY(24px);
   }
   .ed-hero-title{
     font-family:var(--font-serif);
@@ -1485,7 +1487,6 @@
     display:flex; justify-content:space-between; align-items:flex-end;
     flex-wrap:wrap; gap:32px;
     margin-top:clamp(36px, 5vw, 64px);
-    animation: fadeUp .9s ease-out .35s backwards;
   }
   .ed-hero-sub{
     color:var(--grey);
