@@ -29,7 +29,7 @@
 
 <!-- Fondo: intro en vídeo (la pelota rueda y se asienta) que se funde con la foto estática de fondo, mismo encuadre — Unsplash pelota/moqueta (Madeline Liu). Una vez por sesión; se omite con prefers-reduced-motion. -->
 <section class="ed-hero">
-  <img class="ed-hero-bg" src="assets/bg-ball-turf.jpg" alt="">
+  <img class="ed-hero-bg ed-hero-bg-static" src="assets/bg-ball-turf.jpg" alt="">
   <video id="introVideo" class="ed-hero-bg" muted playsinline>
     <source src="assets/intro-pelota.mp4" type="video/mp4">
   </video>
@@ -108,6 +108,7 @@
   (() => {
     const video = document.getElementById('introVideo');
     if (!video) return;
+    const staticImg = document.querySelector('.ed-hero-bg-static');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const alreadySeen = sessionStorage.getItem('introSeen');
     const title = document.querySelector('.ed-hero-title');
@@ -123,6 +124,7 @@
     // Sin vídeo: se ve directamente el fondo estático de .ed-hero (mismo encuadre, 65% 46% cover),
     // y el resto del contenido se revela ya, sin nada con lo que sincronizarlo.
     if (reduceMotion || alreadySeen) {
+      staticImg && (staticImg.style.opacity = '1');
       video.remove();
       revealHeroContent();
       return;
@@ -130,10 +132,14 @@
     sessionStorage.setItem('introSeen', '1');
 
     // La foto de fondo es el propio último fotograma del vídeo, así que no hace falta fundido: se quita y ya está.
+    // Hasta este momento la imagen estática permanece oculta (ver CSS .ed-hero-bg-static) para que,
+    // mientras el vídeo carga/busca en redes lentas, no se vea la pelota ya parada antes de que
+    // arranque rodando — solo el fondo negro del hero.
     let done = false;
     const revealStatic = () => {
       if (done) return;
       done = true;
+      staticImg && (staticImg.style.opacity = '1');
       video.remove();
     };
     video.addEventListener('ended', revealStatic);

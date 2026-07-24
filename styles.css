@@ -1472,6 +1472,12 @@
     opacity:0;
     transform:translateY(24px);
   }
+  /* Mientras el vídeo de intro carga/busca su punto de inicio (redes lentas), se oculta
+     la imagen estática para no enseñar la pelota ya parada antes de que arranque el vídeo
+     rodando — el JS la revela solo si hace falta (sin vídeo, error, o al terminar). */
+  html.js-motion .ed-hero-bg-static{
+    opacity:0;
+  }
   .ed-hero-title{
     font-family:var(--font-serif);
     font-optical-sizing:auto;
